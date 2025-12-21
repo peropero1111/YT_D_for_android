@@ -12,7 +12,7 @@ void main() {
   runApp(const MyApp());
 }
 
-/// 앱의 시작점입니다.
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/// 다운로드 페이지의 UI와 상태를 관리하는 위젯입니다.
+/// 다운로드 페이지의 UI
 class DownloadPage extends StatefulWidget {
   const DownloadPage({super.key});
 
@@ -55,7 +55,7 @@ class _DownloadPageState extends State<DownloadPage> {
     super.dispose();
   }
 
-  /// 사용자가 입력한 URL을 분석하고 다운로드를 시작하는 메인 함수입니다.
+  /// 사용자가 입력한 URL을 분석하고 다운로드를 시작하는 메인 함수
   Future<void> _startDownload() async {
     final input = _urlController.text.trim();
     if (input.isEmpty) {
@@ -63,7 +63,7 @@ class _DownloadPageState extends State<DownloadPage> {
       return;
     }
 
-    // [권한 요청] 모바일 환경(Android)에서 저장소 접근 권한을 확인합니다.
+    // 모바일 환경에서 저장소 접근 권한을 확인
     if (!kIsWeb && Platform.isAndroid) {
       if (await Permission.storage.request().isDenied) {
         if (await Permission.videos.request().isDenied) {
@@ -84,7 +84,7 @@ class _DownloadPageState extends State<DownloadPage> {
       List<Video> videos = [];
       String uploader = '';
 
-      // [URL 분석] 입력된 주소가 단일 영상인지 채널인지 판별합니다.
+      //  입력된 주소가 단일 영상인지 채널인지 판별하는 함수
       if (input.contains('watch?v=') || input.contains('youtu.be/')) {
         // 단일 동영상 주소가 입력된 경우
         final video = await _yt.videos.get(input);
@@ -100,7 +100,7 @@ class _DownloadPageState extends State<DownloadPage> {
           try {
             channel = await _yt.channels.get(input);
           } catch (e) {
-            // URL 안에 @핸들이 포함된 경우 (예: youtube.com/@name) 처리
+            // URL 안에 @핸들이 포함된 경우
             if (input.contains('/@')) {
               final handle = '@' + input.split('/@').last.split('?').first;
               channel = await _yt.channels.getByHandle(handle);
@@ -136,7 +136,7 @@ class _DownloadPageState extends State<DownloadPage> {
             directory = await getExternalStorageDirectory();
           }
         } else {
-          // 데스크톱(Windows 등)은 시스템 다운로드 폴더 사용
+          // 데스크톰톰은 시스템 다운로드 폴더 사용
           directory = await getDownloadsDirectory() ?? await getApplicationDocumentsDirectory();
         }
 
