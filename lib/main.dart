@@ -172,7 +172,7 @@ class _DownloadPageState extends State<DownloadPage> {
         bool success = await _downloadVideo(video, savePathStr);
         if (success) successCount++;
 
-        // 웹 환경에서는 연속 다운로드 시 브라우저 차단을 피하기 위해 약간의 대기 시간을 둠둠
+        // 웹 환경에서는 연속 다운로드 시 브라우저 차단을 피하기 위해 약간의 대기 시간을 둠
         if (kIsWeb) await Future.delayed(const Duration(milliseconds: 500));
       }
 
@@ -192,21 +192,21 @@ class _DownloadPageState extends State<DownloadPage> {
     }
   }
 
-  /// 개별 동영상의 스트림 데이터를 가져와 실제로 파일로 저장하는 함수입니다.
+  /// 개별 동영상의 스트림 데이터를 가져와 실제로 파일로 저장하는 함수
   Future<bool> _downloadVideo(Video video, String savePath) async {
     try {
-      // 영상의 다양한 스트림 정보(화질 등)를 가져옵니다.
+      // 영상의 다양한 스트림 정보를 가져옴
       final manifest = await _yt.videos.streamsClient.getManifest(video.id);
-      // 오디오와 비디오가 합쳐진 가장 높은 화질의 스트림을 선택합니다.
+      // 오디오와 비디오가 합쳐진 가장 높은 화질의 스트림을 선택함
       final streamInfo = manifest.muxed.withHighestBitrate();
 
       if (streamInfo != null) {
-        // 파일 이름에서 사용할 수 없는 특수문자를 제거합니다.
+        // 파일 이름에서 사용할 수 없는 특수문자를 제거함함
         final baseName = video.title.replaceAll(RegExp(r'[<>:"/\\|?*]'), '');
         String fileName = '$baseName.mp4';
 
         if (kIsWeb) {
-          // [웹 환경] 데이터를 메모리에 모은 후 브라우저의 다운로드 기능을 트리거합니다.
+          // 웹에서 데이터를 메모리에 모은 후 브라우저의 다운로드 기능을 트리거함함
           final stream = _yt.videos.streamsClient.get(streamInfo);
           List<int> bytes = [];
           await for (var chunk in stream) {
