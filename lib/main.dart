@@ -136,7 +136,7 @@ class _DownloadPageState extends State<DownloadPage> {
             directory = await getExternalStorageDirectory();
           }
         } else {
-          // 데스크톰톰은 시스템 다운로드 폴더 사용
+          // 데스크톱은 시스템 다운로드 폴더 사용
           directory = await getDownloadsDirectory() ?? await getApplicationDocumentsDirectory();
         }
 
