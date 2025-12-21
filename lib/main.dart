@@ -201,12 +201,12 @@ class _DownloadPageState extends State<DownloadPage> {
       final streamInfo = manifest.muxed.withHighestBitrate();
 
       if (streamInfo != null) {
-        // 파일 이름에서 사용할 수 없는 특수문자를 제거함함
+        // 파일 이름에서 사용할 수 없는 특수문자를 제거함
         final baseName = video.title.replaceAll(RegExp(r'[<>:"/\\|?*]'), '');
         String fileName = '$baseName.mp4';
 
         if (kIsWeb) {
-          // 웹에서 데이터를 메모리에 모은 후 브라우저의 다운로드 기능을 트리거함함
+          // 웹에서 데이터를 메모리에 모은 후 브라우저의 다운로드 기능을 트리거함
           final stream = _yt.videos.streamsClient.get(streamInfo);
           List<int> bytes = [];
           await for (var chunk in stream) {
@@ -232,7 +232,7 @@ class _DownloadPageState extends State<DownloadPage> {
             counter++;
           }
 
-          // 파일 시스템에 직접 스트림 데이터를 씀씀
+          // 파일 시스템에 직접 스트림 데이터를 씀
           final stream = _yt.videos.streamsClient.get(streamInfo);
           final file = File(finalPath);
           final fileStream = file.openWrite();
