@@ -123,7 +123,7 @@ class _DownloadPageState extends State<DownloadPage> {
         return;
       }
 
-      // [파일 경로 설정] 저장할 폴더 이름을 정제하고 경로를 생성합니다.
+      //  저장할 폴더 이름을 정제하고 경로를 생성
       final safeUploader = uploader.replaceAll(RegExp(r'[<>:"/\\|?*]'), '');
 
       String savePathStr = '';
@@ -157,7 +157,7 @@ class _DownloadPageState extends State<DownloadPage> {
         _lastSavedPath = savePathStr;
       });
 
-      // [반복 다운로드] 수집된 영상 리스트를 순회하며 하나씩 다운로드합니다.
+      // 수집된 영상 리스트를 순회하며 하나씩 다운로드
       int successCount = 0;
       for (var i = 0; i < videos.length; i++) {
         final video = videos[i];
@@ -172,7 +172,7 @@ class _DownloadPageState extends State<DownloadPage> {
         bool success = await _downloadVideo(video, savePathStr);
         if (success) successCount++;
 
-        // 웹 환경에서는 연속 다운로드 시 브라우저 차단을 피하기 위해 약간의 대기 시간을 둡니다.
+        // 웹 환경에서는 연속 다운로드 시 브라우저 차단을 피하기 위해 약간의 대기 시간을 둠둠
         if (kIsWeb) await Future.delayed(const Duration(milliseconds: 500));
       }
 
