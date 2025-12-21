@@ -221,18 +221,18 @@ class _DownloadPageState extends State<DownloadPage> {
           html.Url.revokeObjectUrl(url);
           return true;
         } else {
-          // [모바일/데스크톱] 중복 파일 이름 처리 로직
+          //  중복 파일 이름 처리 로직
           String finalPath = p.join(savePath, fileName);
           int counter = 1;
 
-          // 동일한 이름의 파일이 이미 폴더에 존재한다면 이름을 변경함 (예: 영상_1.mp4)
+          // 동일한 이름의 파일이 이미 폴더에 존재한다면 이름을 변경함 
           while (File(finalPath).existsSync()) {
             fileName = '${baseName}_$counter.mp4';
             finalPath = p.join(savePath, fileName);
             counter++;
           }
 
-          // 파일 시스템에 직접 스트림 데이터를 씁니다.
+          // 파일 시스템에 직접 스트림 데이터를 씀씀
           final stream = _yt.videos.streamsClient.get(streamInfo);
           final file = File(finalPath);
           final fileStream = file.openWrite();
