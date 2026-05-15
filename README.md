@@ -7,4 +7,6 @@
 <br/>
 <br/>
 [여기](https://drive.proton.me/urls/QPD6ZADMY0#r74vCUvUObhG) 에서 완성된 android 용 파일을 다운하실 수 있습니다.
-
+</br>
+</br>
+※ GitHub 언어 통계에 C++/Swift가 표시될 수 있지만, 본 프로젝트는 Flutter(Dart) 기반으로 개발되었습니다.
